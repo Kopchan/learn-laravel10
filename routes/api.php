@@ -1,7 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +18,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route
+::controller(AuthController::class)
+->group(function ($auth) {
+    $auth->get ('/signup', 'signup');
+    $auth->post('/login' , 'login');
+    $auth->middleware('auth:api')->post('/logout', 'logout');
+});
+
+Route
+::controller(UserController::class)
+->prefix('users')
+->group(function ($users) {
+    $users->post  (''    , 'create');
+    $users->get   (''    , 'showAll');
+    $users->get   ('{id}', 'show');
+    $users->patch ('{id}', 'update');
+    $users->delete('{id}', 'delete');
+});
+
+Route
+::controller(RoleController::class)
+->prefix('roles')
+->group(function ($users) {
+    $users->post  (''    , 'create');
+    $users->get   (''    , 'showAll');
+    $users->get   ('{id}', 'show');
+    $users->patch ('{id}', 'update');
+    $users->delete('{id}', 'delete');
+});
+
+Route
+::controller(ProductController::class)
+->prefix('products')
+->group(function ($users) {
+    $users->post  (''    , 'create');
+    $users->get   (''    , 'showAll');
+    $users->get   ('{id}', 'show');
+    $users->patch ('{id}', 'update');
+    $users->delete('{id}', 'delete');
+});
+
+Route
+::controller(CategoryController::class)
+->prefix('categories')
+->group(function ($users) {
+    $users->post  (''    , 'create');
+    $users->get   (''    , 'showAll');
+    $users->get   ('{id}', 'show');
+    $users->patch ('{id}', 'update');
+    $users->delete('{id}', 'delete');
 });

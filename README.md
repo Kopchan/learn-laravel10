@@ -16,7 +16,12 @@ composer i
 php artisan key:generate
 ```
 
-Переименуйте файл .env.example в .env и пропешите найстройки подключения к БД
+Переименуйте файл .env.example в .env и пропишите найстройки подключения к БД
+
+```sh
+copy .env.example .env
+```
+
 
 ```sh
 php artisan migrate --seed

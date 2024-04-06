@@ -13,14 +13,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-
+        'surname', 'name', 'patronymic', 'login', 'password', 'role_id'
     ];
+    protected $hidden = ['password'];
+    protected $casts = ['password' => 'hashed'];
 
-    protected $hidden = [
-
-    ];
-
-    protected $casts = [
-
-    ];
+    public function role() {
+        $this->belongsTo(Role::class);
+    }
 }
